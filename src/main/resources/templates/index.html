@@ -1,0 +1,133 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>商城首页</title>
+    <link rel="icon" href="favicon.ico">
+    <script type="text/javascript" th:src="@{/js/jquery-1.8.2.min.js}"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/public.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/index.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/forget.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/idea.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/mygrxx.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/myorder.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/proList.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/myStyle.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/bootstrap3/css/bootstrap.css}">
+    <script type="text/javascript" th:src="@{/js/public.js}"></script>
+    <script type="text/javascript" th:src="@{/js/jquery-1.8.2.min.js}"></script>
+    <script type="text/javascript" th:src="@{/layer/layer.js}"></script>
+    <script type="text/javascript" th:src="@{/js/login.js}"></script>
+
+</head>
+<body><!------------------------------head------------------------------>
+<!--<jsp:include page="head.jsp"></jsp:include>-->
+<!-------------------------banner--------------------------->
+<div th:insert="~{headAndtail::headbar}"></div>
+
+<!--<div class="news">
+    <div class="wrapper"><h2><img th:src="@{/img/ih1.jpg}"/></h2>
+        <div class="flower clearfix tran">
+            <a th:each="product:${productLists}" th:href="@{/proDetail}" class="clearfix">
+                <dl>
+                    <dt><span class="abl"></span><img id="imgStyle" th:src="@{${product.pimg}}"/><span class="abr"></span></dt>
+                    <dd th:text="${product.pname}"></dd>
+                    <dd><span th:text="${product.price}"></span></dd>
+                </dl>
+            </a>
+        </div>
+    </div>
+</div>-->
+<!--<div class="people">-->
+
+<div id="topSp" class="blink">
+    热销商品
+</div>
+
+            <div th:each="product:${productLists}">
+                <a th:href="@{/proDetail(id=${product.id},ptypeId=${product.ptypeId})}" style="float: left; margin-left: 30px; margin-top: 30px; cursor: pointer; text-align: center; font-weight: 800;font-size: 24px;">
+                    <dl>
+                        <dt><img id="imgStyle" th:src="@{'/shooping_Imgs/'+${product.pimg}}"/><span class="abr"></span></dt>
+                        <dd th:text="${product.pname}"></dd>
+                        <dd><span style="color: red;" th:text="'￥'+${product.price}"></span></dd>
+                    </dl>
+                </a>
+            </div>
+            <!--<a href="proDetail.html">
+                <dl>
+                    <dt><span class="abl"></span><img th:src="@{/img/s10.jpg}"/><span class="abr"></span></dt>
+                    <dd>【最家】小城动物木板画壁挂北欧</dd>
+                    <dd><span>￥188.00</span></dd>
+                </dl>
+            </a><a href="proDetail.html">
+            <dl>
+                <dt><span class="abl"></span><img th:src="@{/img/s4.jpg}"/><span class="abr"></span></dt>
+                <dd>【最家】玄关假山水壁饰背景墙饰挂件创意</dd>
+                <dd><span>￥599.00</span></dd>
+            </dl>
+        </a><a href="proDetail.html">
+            <dl>
+                <dt><span class="abl"></span><img th:src="@{/img/s9.jpg}"/><span class="abr"></span></dt>
+                <dd>【最家】金属树枝壁饰铜鸟装饰品</dd>
+                <dd><span>￥928.00</span></dd>
+            </dl>
+        </a></div>
+        <div class="pList clearfix tran"><a href="proDetail.html">
+            <dl>
+                <dt><span class="abl"></span><img th:src="@{/img/s6.jpg}"/><span class="abr"></span></dt>
+                <dd>【最家】金属壁饰创意背景墙面挂件创意</dd>
+                <dd><span>￥228.00</span></dd>
+            </dl>
+        </a><a href="proDetail.html">
+            <dl>
+                <dt><span class="abl"></span><img th:src="@{/img/s8.jpg}"/><span class="abr"></span></dt>
+                <dd>【最家】小城动物木板画壁挂北欧</dd>
+                <dd><span>￥199.00</span></dd>
+            </dl>
+        </a><a href="proDetail.html">
+            <dl>
+                <dt><span class="abl"></span><img th:src="@{/img/s12.jpg}"/><span class="abr"></span></dt>
+                <dd>【最家】欧式复古挂钟创意餐厅钟表家居挂件</dd>
+                <dd><span>￥666.00</span></dd>
+            </dl>
+        </a><a href="proDetail.html">
+            <dl>
+                <dt><span class="abl"></span><img th:src="@{/img/s1.jpg}"/><span class="abr"></span></dt>
+                <dd>【最家】客厅地中海欧式现代相片墙创意</dd>
+                <dd><span>￥59.80</span></dd>
+            </dl>
+        </a></div>
+        <div class="pList clearfix tran"><a href="proDetail.html">
+            <dl>
+                <dt><span class="abl"></span><img th:src="@{/img/s5.jpg}"/><span class="abr"></span></dt>
+                <dd>【最家】铁艺荷叶壁挂软装背景墙上装饰品</dd>
+                <dd><span>￥800.00</span></dd>
+            </dl>
+        </a><a href="proDetail.html">
+            <dl>
+                <dt><span class="abl"></span><img th:src="@{/img/s3.jpg}"/><span class="abr"></span></dt>
+                <dd>【最家】欧式照片墙 创意组合结婚礼物</dd>
+                <dd><span>￥189.00</span></dd>
+            </dl>
+        </a><a href="proDetail.html">
+            <dl>
+                <dt><span class="abl"></span><img th:src="@{/img/s2.jpg}"/><span class="abr"></span></dt>
+                <dd>【最家】欧式钟表相框墙挂墙创意组合</dd>
+                <dd><span>￥148.00</span></dd>
+            </dl>
+        </a><a href="proDetail.html">
+            <dl>
+                <dt><span class="abl"></span><img th:src="@{/img/s11.jpg}"/><span class="abr"></span></dt>
+                <dd>【最家】小城动物木板画壁挂北欧</dd>
+                <dd><span>￥188.00</span></dd>
+            </dl>
+        </a>-->
+        <!--</div>-->
+    </div>
+</div>
+<!--返回顶部-->
+<div th:insert="~{headAndtail::gotopbar}"></div>
+<!--footer-->
+<!--<jsp:include page="footer.jsp"></jsp:include>-->
+<div th:insert="~{headAndtail::tailbar}"></div>
+
+</body>
+</html>

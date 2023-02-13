@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        .blink{
+            font-size: 24px;
+            color:black;
+            margin: 10px;
+            animation: changeshadow 1s  ease-in  infinite ;
+            /* 其它浏览器兼容性前缀 */
+            -webkit-animation: changeshadow 1s linear infinite;
+            -moz-animation: changeshadow 1s linear infinite;
+            -ms-animation: changeshadow 1s linear infinite;
+            -o-animation: changeshadow 1s linear infinite;
+        }
+        @keyframes changeshadow {
+            0%{ text-shadow: 0 0 4px #4cc134}
+            50%{ text-shadow: 0 0 40px #4cc134}
+            100%{ text-shadow: 0 0 4px #4cc134}
+        }
+        /* 添加兼容性前缀 */
+        @-webkit-keyframes changeshadow {
+            0%{ text-shadow: 0 0 4px #4cc134}
+            50%{ text-shadow: 0 0 40px #4cc134}
+            100%{ text-shadow: 0 0 4px #4cc134}
+        }
+        @-moz-keyframes changeshadow {
+            0%{ text-shadow: 0 0 4px #4cc134}
+            50%{ text-shadow: 0 0 40px #4cc134}
+            100%{ text-shadow: 0 0 4px #4cc134}
+        }
+        @-ms-keyframes changeshadow {
+            0%{ text-shadow: 0 0 4px #4cc134}
+            50%{ text-shadow: 0 0 40px #4cc134}
+            100%{ text-shadow: 0 0 4px #4cc134}
+        }
+        @-o-keyframes changeshadow {
+            0%{ text-shadow: 0 0 4px #4cc134}
+            50%{ text-shadow: 0 0 40px #4cc134}
+            100%{ text-shadow: 0 0 4px #4cc134}
+        }
+    </style>
+</head>
+<body>
+<div style="margin-left: 30px;">
+      <img th:src="@{/shooping_Imgs/yimingLogo.jpg}" style="width: 100px; height: 100px;"/>
+</div>
+<div class="blink" style="margin-left: 25px">一鸣商城</div>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <title>order</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/public.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/proList.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/mygxin.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/myStyle.css}"/>
+    <script th:src="@{/js/jquery-1.8.2.min.js}" type="text/javascript" charset="utf-8"></script>
+    <script th:src="@{/layer/layer.js}" type="text/javascript" charset="utf-8"></script>
+    <script th:src="@{/js/order.js}" type="text/javascript" charset="utf-8"></script>
+</head>
+<body><!----------------------------------------order------------------>
+<div class="head ding">
+    <div class="wrapper clearfix">
+        <div class="clearfix" id="top"><h1 class="fl"><a href="index.html"><img th:src="@{/shooping_Imgs/yimingLogoPlus.jpg}"/></a></h1>
+            <div class="fr clearfix" id="top1"><p class="fl"><a href="#" id="login">登录</a><a href="#" id="reg">注册</a>
+            </p>
+                <form action="#" method="get" class="fl"><input type="text" placeholder="搜索"/><input type="button"/>
+                </form>
+                <div class="btn fl clearfix"><a href="mygxin.html"><img th:src="@{/img/grzx.png}"/></a><a href="#" class="er1"><img
+                        th:src="@{/img/ewm.png}"/></a><a href="cart.html"><img th:src="@{/img/gwc.png}"/></a>
+                    <p><a href="#"><img th:src="@{/img/smewm.png}"/></a></p></div>
+            </div>
+        </div>
+       <div th:insert="~{ulbaner.html::ulbar}"></div>
+    </div>
+</div>
+<div class="order cart mt"><!-----------------site------------------->
+    <div class="site"><p class="wrapper clearfix"><span class="fl">订单确认</span><img class="top"
+                                                                                   th:src="@{/img/temp/cartTop02.png}"></p>
+    </div><!-----------------orderCon------------------->
+    <div class="orderCon wrapper clearfix">
+        <div class="orderL fl"><!--------h3----------------><h3>收件信息<a href="#" class="fr">新增地址</a></h3>
+            <!--------addres---------------->
+            <div class="addres clearfix">
+                <select id="address_list">
+
+                </select>
+            </div>
+            <h3>支付方式</h3><!--------way---------------->
+            <div class="way clearfix"><img class="on" th:src="@{/img/temp/way01.jpg}"><img th:src="@{/img/temp/way02.jpg}"><img
+                    th:src="@{/img/temp/way03.jpg}"><img th:src="@{/img/temp/way04.jpg}"></div>
+            <h3>选择快递</h3><!--------dis---------------->
+            <div class="dis clearfix"><span class="on">顺风快递</span><span>百世汇通</span><span>圆通快递</span><span>中通快递</span>
+            </div>
+        </div>
+        <div class="orderR fr">
+            <div class="msg" id="orderItemMsg">
+                <h3>订单内容<a href="cart.html" class="fr">返回购物车</a></h3>
+                <!--<ul class="clearfix">
+                    <li class="fl"><img th:src="@{/img/temp/order01.jpg}"></li>
+                    <li class="fl"><p>创意现代简约干花花瓶摆件</p>
+                        <p>颜色分类：烟灰色玻璃瓶</p>
+                        <p>数量：1</p></li>
+                    <li class="fr">￥69.90</li>
+                </ul>-->
+                <!--<ul class="clearfix">
+                    <li class="fl"><img th:src="@{/img/temp/order02.jpg}"></li>
+                    <li class="fl"><p>创意现代简约干花花瓶摆件</p>
+                        <p>颜色分类：烟灰色玻璃瓶</p>
+                        <p>数量：1</p></li>
+                    <li class="fr">￥69.90</li>
+                </ul>-->
+            </div>
+            <!--------tips---------------->
+            <div class="tips"><p><span class="fl">商品金额：</span><span class="fr">￥<span id="productPrice"></span></span></p>
+                <p><span class="fl">优惠金额：</span><span class="fr">￥0.00</span></p>
+                <p><span class="fl">运费：</span><span class="fr">免运费</span></p></div><!--------tips count---------------->
+            <div class="count tips"><p><span class="fl">合计：</span><span class="fr">￥<span id="product_realPrice"></span></span></p></div>
+            <!--<input type="button" name="" value="去支付">--> <a style="cursor: pointer;" onclick="ok()" class="pay">去支付</a><br>
+            <p style="width: 100px; height: 30px; background-color: #E0E0E0; line-height: 30px; text-align: center; cursor: pointer;" onclick="cancel()">取消订单</p>
+        </div>
+    </div>
+</div>
+<input type="hidden" id="oid">
+<!--返回顶部-->
+<div th:insert="~{headAndtail::gotopbar}"></div>
+<!--footer-->
+<div th:insert="~{headAndtail::tailbar}"></div>
+
+<script th:src="@{/js/jquery-1.12.4.min.js}" type="text/javascript" charset="utf-8"></script>
+<script th:src="@{/js/public.js}" type="text/javascript" charset="utf-8"></script>
+<script th:src="@{/js/pro.js}" type="text/javascript" charset="utf-8"></script>
+<script th:src="@{/js/user.js}" type="text/javascript" charset="utf-8"></script>
+</body>
+</html>

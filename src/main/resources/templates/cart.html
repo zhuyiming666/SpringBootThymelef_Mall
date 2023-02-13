@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <title>cart</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/public.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/proList.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/myStyle.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/bootstrap3/css/bootstrap.css}">
+</head>
+<body><!--------------------------------------cart--------------------->
+<div class="cart mt"><!-----------------logo------------------->
+    <!--<div class="logo"><h1 class="wrapper clearfix"><a href="index.html"><img class="fl" src="img/temp/logo.png"></a><img class="top" src="img/temp/cartTop01.png"></h1></div>-->
+    <!-----------------site------------------->
+    <div class="site"><p class=" wrapper clearfix"><span class="fl">购物车</span><img class="top"
+                                                                                   th:src="@{/img/temp/cartTop01.png}"><a
+            th:href="@{/index.html}" class="fr">继续购物&gt;</a></p></div><!-----------------table------------------->
+    <!--  <div>-->
+    <!-- <div class="tr">
+         <div>商品</div>
+         <div>单价</div>
+         <div>数量</div>
+         <div>小计</div>
+         <div>操作</div>
+     </div>-->
+
+
+    <table id="tr_append" border="1">
+        <tr id="tr1">
+            <td><input type="checkbox" id="checks">全选</td>
+            <td>商品</td>
+            <td>单价</td>
+            <td>数量</td>
+            <td>小计</td>
+            <td>操作</td>
+        </tr>
+    </table>
+    <div id="fengye">
+
+    </div>
+    <div id="bottomCart">
+            <span id="delchecks" onclick="delCartByCids()">删除</span>
+            <span id="yg">一共</span>
+            <span style="color: red;"></span>
+            <span>件商品</span>
+            <span id="accounts" onclick="accounts()">结算</span>
+            <span style="color: red">￥</span>
+            <span id="totalPrice">0.00</span>
+    </div>
+</div>
+<!--<div>
+    <div class="goOn">空空如也~<a th:href="@{/index.html}">去逛逛</a></div>
+    <div class="tr clearfix"><label class="fl"><input class="checkAll" type="checkbox"/><span></span></label>
+        <p class="fl"><a href="#">全选</a><a href="#" class="del">删除</a></p>
+        <p class="fr"><span>共<small id="sl">0</small>件商品</span><span>合计:&nbsp;<small id="all">￥0.00</small></span><a
+                th:href="@{/order.html}" class="count">结算</a></p></div>
+</div>-->
+</div>
+<div class="mask"></div>
+<div class="tipDel"><p>确定要删除该商品吗？</p>
+    <p class="clearfix"><a class="fl cer" href="#">确定</a><a class="fr cancel" href="#">取消</a></p></div><!--返回顶部-->
+<!--gotop-->
+<div th:insert="~{headAndtail::gotopbar}"></div>
+<!--footer-->
+<div th:insert="~{headAndtail::tailbar}"></div><!----------------mask------------------->
+<div class="mask"></div><!-------------------mask内容------------------->
+<!--<div class="proDets"><img class="off" src="img/temp/off.jpg"/>
+    <div class="proCon clearfix">
+        <div class="proImg fr"><img class="list" src="img/temp/proDet.jpg"/>
+            <div class="smallImg clearfix"><img src="img/temp/proDet01.jpg" data-src="img/temp/proDet01_big.jpg"><img
+                    src="img/temp/proDet02.jpg" data-src="img/temp/proDet02_big.jpg"><img src="img/temp/proDet03.jpg"
+                                                                                          data-src="img/temp/proDet03_big.jpg"><img
+                    src="img/temp/proDet04.jpg" data-src="img/temp/proDet04_big.jpg"></div>
+        </div>
+        <div class="fl">
+            <div class="proIntro change"><p>颜色分类</p>
+                <div class="smallImg clearfix"><p class="fl on"><img src="img/temp/prosmall01.jpg" alt="白瓷花瓶+20支快乐花"
+                                                                     data-src="img/temp/proBig01.jpg"></p>
+                    <p class="fl"><img src="img/temp/prosmall02.jpg" alt="白瓷花瓶+20支兔尾巴草"
+                                       data-src="img/temp/proBig02.jpg"></p>
+                    <p class="fl"><img src="img/temp/prosmall03.jpg" alt="20支快乐花" data-src="img/temp/proBig03.jpg"></p>
+                    <p class="fl"><img src="img/temp/prosmall04.jpg" alt="20支兔尾巴草" data-src="img/temp/proBig04.jpg"></p>
+                </div>
+            </div>
+            <div class="changeBtn clearfix"><a href="#2" class="fl"><p class="buy">确认</p></a><a href="#2" class="fr"><p
+                    class="cart">取消</p></a></div>
+        </div>
+    </div>
+</div>
+<div class="pleaseC"><p>请选择宝贝</p><img class="off" th:src="@{/img/temp/off.jpg}"/></div>-->
+<!--<script th:src="@{/js/jquery-1.12.4.min.js}" type="text/javascript" charset="utf-8"></script>-->
+<script type="text/javascript" th:src="@{/js/jquery-1.8.2.min.js}"></script>
+<script th:src="@{/layer/layer.js}" type="text/javascript" charset="utf-8"></script>
+<script th:src="@{/js/public.js}" type="text/javascript" charset="utf-8"></script>
+<script th:src="@{/js/pro.js}" type="text/javascript" charset="utf-8"></script>
+<script th:src="@{/js/cart.js}" type="text/javascript" charset="utf-8"></script>
+<script>
+    $(function () {
+        showCartList();
+    })
+
+    //<img th:scr="@{/shooping_Imgs/'+data[i].image+'}">
+    function showCartList(currPage) {
+        if (currPage==null){
+            currPage=1;
+        }
+        let tr_append = $("#tr_append");
+        let fengye=$("#fengye");
+        $.ajax({
+            url: "/zym/cart/showCart/"+currPage,
+            type: "get",
+            dataType: "json",
+            success: function (data) {
+                $("#tr_append tr:gt(0)").remove();
+                $("#fengye a").remove();
+                let cartVos=data.cartVos;
+                for (let i = 0; i < cartVos.length; i++) {
+                    let tr = '<tr class="trzi">\n' +
+                        '                <td><input class='+cartVos[i].cid+' type="checkbox" onclick="checkPrice(' + cartVos[i].realPrice + ','+cartVos[i].cid+')" name="check"></td>\n' +
+                        '                <td><span><img class="cartImg" src="/zym/shooping_Imgs/' + cartVos[i].image + '"></span><span class="spanCart">' + cartVos[i].pName + '</span></td>\n' +
+                        '                                <td><span>￥</span><span>' + cartVos[i].price + '</span></td>\n' +
+                        '                               <td id="numberAddSub"><img class="fl sub" src="/zym/img/temp/sub.jpg" onclick="downNumber(' + cartVos[i].cid + ','+data.currPage+',' + cartVos[i].realPrice + ')"><span id="' + cartVos[i].cid + '" class="fl" contentEditable="false">' + cartVos[i].number + '</span><img class="fl add" src="/zym/img/temp/add.jpg" onclick="addNumber(' + cartVos[i].cid + ','+data.currPage+',' + cartVos[i].realPrice + ')"></td>\n' +
+                        '                               <td><span>￥</span><span id="' + cartVos[i].cid + 'r">' + cartVos[i].realPrice + '</span></td>\n' +
+                        '                <td onclick="delCartByCid(' + cartVos[i].cid + ','+data.currPage+')" style="cursor: pointer;">删除</td>\n' +
+                        '            </tr>';
+
+                    tr_append.append(tr);
+                }
+                let a='<a onclick="showCartList(1)">首页</a>\n' +
+                    '        <a onclick="showCartList('+(data.currPage-1)+')">上一页</a>\n' +
+                    '        <a onclick="showCartList('+(data.currPage+1)+')">下一页</a>\n' +
+                    '        <a onclick="showCartList('+(data.pageCount)+')">尾页</a>';
+
+                fengye.append(a);
+            },
+            error: function (errorStatus) {
+                layer.alert('购物车数据列表加载产生未知的异常!', "状态为" + errorStatus.status, {icon: 5});
+            }
+        })
+    };
+
+</script>
+</body>
+</html>

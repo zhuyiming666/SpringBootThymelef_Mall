@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/public.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/login.css}"/>
+    <script type="text/javascript" th:src="@{/js/jquery-1.8.2.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/login.js}"></script>
+    <script type="text/javascript" th:src="@{/layer/layer.js}"></script>
+
+</head>
+<body><!-------------------login-------------------------->
+<div class="login">
+    <form id="login_form"><h1><a href="index.html"><img th:src="@{/img/temp/logo.png}"></a></h1>
+        <p></p>
+        <div class="msg-warn hide"><b></b>公共场所不建议自动登录，以防账号丢失</div>
+        <p><input type="text" name="email"  placeholder="输入邮箱"></p>
+        <p><input type="text" name="password" placeholder="密码"></p>
+        <div id="p1_error"></div>
+        <p><button type="button" class="btn_login" th:text="登录" style="cursor: pointer;" onclick="btn_login()"/></p>
+        <p class="txt"><a class="" href="reg.html">免费注册</a><a href="forget.html">忘记密码？</a></p>
+    </form>
+</div>
+</body>
+</html>

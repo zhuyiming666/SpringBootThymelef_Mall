@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zym.mapper.ProductDao">
+    <select id="getProductTypeNames" resultType="ProductType">
+        select id,p_typename as ptypeName from tb_producttype
+    </select>
+
+    <select id="getIndexProduct" resultMap="productNewName">
+        SELECT
+        a.*,at.*,at.id as tid
+        FROM
+        tb_product AS a,
+        tb_producttype as at
+        WHERE
+        (SELECT
+        COUNT(*)
+        FROM
+        tb_product AS b
+        WHERE
+        b.p_typeid = a.p_typeid AND b.p_price >= a.p_price) &lt;= 2
+        and a.p_typeid=at.p_typeid
+        ORDER BY a.p_typeid ASC , a.p_price DESC
+    </select>
+
+
+    <resultMap id="productNewName" type="Product">
+        <id column="id" property="id"></id>
+        <result column="p_name" property="pname"></result>
+        <result column="p_price" property="price"></result>
+        <result column="p_virtual" property="pvirtual"></result>
+        <result column="p_sketch" property="psketch"></result>
+        <result column="p_img" property="pimg"></result>
+        <result column="p_date" property="pdate"></result>
+        <result column="p_stock" property="pstock"></result>
+        <result column="p_status" property="pstatus"></result>
+        <result column="p_typeId" property="ptypeId"></result>
+        <association property="productType" javaType="ProductType">
+            <id column="tid" property="id"></id>
+            <result column="p_typename" property="ptypeName"></result>
+            <result column="p_typeid" property="ptypeId"></result>
+            <result column="p_typeunit" property="ptypeUnit"></result>
+        </association>
+    </resultMap>
+
+    <select id="getProductById" parameterType="Integer" resultMap="productNewName">
+        select a.*,b.*,b.id as tid from tb_product as a,tb_producttype as b where a.id=#{id}
+        and a.p_typeid=b.p_typeid
+    </select>
+
+    <select id="getRandomProduct" resultMap="productNewName" parameterType="Integer">
+        select a.*,at.*,at.id as tid from tb_product as a,tb_producttype as at
+        where a.p_typeid=#{ptypeId}
+        and a.id not in(#{id})
+        and a.p_typeid=at.p_typeid
+        limit #{start},#{end}
+    </select>
+
+    <select id="ProductCountByTypeId" parameterType="Integer" resultType="Integer">
+        select count(1) from tb_product where p_typeid=#{ptypeId}
+    </select>
+
+    <select id="getProductByTypeId" parameterType="Integer" resultMap="productNewName">
+        select * from tb_product where p_typeid=#{ptypeId}
+    </select>
+
+</mapper>

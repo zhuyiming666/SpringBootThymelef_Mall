@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zym.mapper.OrderDao">
+    <insert id="insertOrder" parameterType="order" useGeneratedKeys="true" keyProperty="oid">
+        INSERT INTO t_order (uid,
+                             recv_name,
+                             recv_phone,
+                             recv_province,
+                             recv_city,
+                             recv_area,
+                             recv_address,
+                             total_price,
+                             status,
+                             order_time,
+                             pay_time
+                            )
+        VALUES (#{uid}, #{recvName}, #{recvPhone}, #{recvProvince},
+                #{recvCity}, #{recvArea}, #{recvAddress},#{totalPrice},#{status},#{orderTime},#{payTime})
+    </insert>
+
+    <insert id="insertOrderItem" parameterType="orderItem" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO t_order_item (
+            oid,
+            pid,
+            title,
+            image,
+            price,
+            num,
+            created_time
+        )
+        VALUES (
+            #{oid},#{pid},#{title},#{image},#{price},#{num},#{createdTime}
+               )
+    </insert>
+
+    <select id="getDefaultAid" resultType="Integer">
+        select aid from tb_address where is_default=1;
+    </select>
+
+
+    <select id="getOrderOidByUid" parameterType="Integer" resultType="Integer">
+        select oid from t_order where uid=#{uid} and status=0 order by
+        created_time desc limit 0,1
+    </select>
+
+    <select id="getOrderItemByOid" parameterType="Integer" resultType="orderItem">
+        select * from t_order_item where oid=#{oid}
+        and (select status from t_order where t_order.oid=#{oid})=0
+    </select>
+
+    <update id="updateOrderAddress">
+        update t_order set recv_province=#{address.provinceName},
+                           recv_city=#{address.cityName},
+                           recv_area=#{address.areaName},
+                           recv_address=#{address.address},
+                           recv_phone=#{address.phone},
+                           recv_name=#{address.name}
+        where oid=#{oid};
+    </update>
+
+    <update id="updateOrderStatus">
+        update t_order
+        <set>
+           <if test="status!=null and status!=0">
+               status=#{status},
+           </if>
+           <if test="payTime!=null">
+               pay_time=#{payTime}
+           </if>
+        </set>
+        where uid=#{uid} and oid=#{oid}
+    </update>
+
+    <select id="getPidsByOid" parameterType="Integer" resultType="Integer">
+        select pid from t_order_item where oid=#{oid}
+    </select>
+
+    <delete id="deleteCartByPid">
+        delete from t_cart
+        where pid
+        <foreach collection="pids" item="pids" index="index" open="in(" close=")" separator=",">
+            #{pids}
+        </foreach>
+    </delete>
+
+    <select id="selectMyAllOid" parameterType="Integer" resultType="Integer">
+        select oid from t_order where status=#{status}
+    </select>
+
+    <select id="getProductVoByOrderOid" parameterType="Integer" resultType="com.zym.vo.ProductVo">
+        select pid,num from t_order_item where oid=#{oid}
+    </select>
+
+    <select id="selectMyAllOrderVo" resultType="com.zym.vo.OrderVo">
+        select t_order_item.oid,t_order.uid,t_order.recv_name as recvName,t_order.recv_phone as recvPhone,t_order.total_price as totalPrice,t_order_item.title,t_order_item.image,t_order.order_time as orderTime,t_order_item.price
+        from t_order_item left join t_order on t_order.oid=t_order_item.oid
+        where t_order_item.oid=#{oid}
+        <!--<foreach collection="oids" item="oids" index="index" open="in(" close=")" separator=",">
+            #{oids}
+        </foreach>-->
+    </select>
+
+    <update id="updateProductNum" parameterType="com.zym.vo.ProductVo">
+        update tb_product set p_stock=p_stock-#{productVo.num} where id=#{productVo.pid}
+    </update>
+</mapper>

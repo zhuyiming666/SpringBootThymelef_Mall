@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        .blink{
+            font-size: 46px;
+            color:#4cc134;
+            margin: 10px;
+            animation: changeshadow 1s  ease-in  infinite ;
+            /* 其它浏览器兼容性前缀 */
+            -webkit-animation: changeshadow 1s linear infinite;
+            -moz-animation: changeshadow 1s linear infinite;
+            -ms-animation: changeshadow 1s linear infinite;
+            -o-animation: changeshadow 1s linear infinite;
+        }
+        @keyframes changeshadow {
+            0%{ text-shadow: 0 0 4px #4cc134}
+            50%{ text-shadow: 0 0 40px #4cc134}
+            100%{ text-shadow: 0 0 4px #4cc134}
+        }
+        /* 添加兼容性前缀 */
+        @-webkit-keyframes changeshadow {
+            0%{ text-shadow: 0 0 4px #4cc134}
+            50%{ text-shadow: 0 0 40px #4cc134}
+            100%{ text-shadow: 0 0 4px #4cc134}
+        }
+        @-moz-keyframes changeshadow {
+            0%{ text-shadow: 0 0 4px #4cc134}
+            50%{ text-shadow: 0 0 40px #4cc134}
+            100%{ text-shadow: 0 0 4px #4cc134}
+        }
+        @-ms-keyframes changeshadow {
+            0%{ text-shadow: 0 0 4px #4cc134}
+            50%{ text-shadow: 0 0 40px #4cc134}
+            100%{ text-shadow: 0 0 4px #4cc134}
+        }
+        @-o-keyframes changeshadow {
+            0%{ text-shadow: 0 0 4px #4cc134}
+            50%{ text-shadow: 0 0 40px #4cc134}
+            100%{ text-shadow: 0 0 4px #4cc134}
+        }
+    </style>
+</head>
+<body>
+<div>
+  <!--  <img th:src="@{/shooping_Imgs/yimingLogo.jpg}"/>-->
+</div>
+<div class="blink">星星之火可以燎原</div>
+<input type="checkbox" id="checks">
+<input type="checkbox" name="check">
+<input type="checkbox" name="check">
+<input type="checkbox" name="check">
+<script>
+    window.onload = function () {
+        let checks = document.getElementById("checks");
+        let check = document.getElementsByName("check");
+        checks.onclick = function () {
+            for (let i = 0; i < check.length; i++) {
+                check[i].checked = this.checked;
+            }
+        }
+        for (let j = 0; j < check.length; j++) {
+            check[j].onclick = function () {
+                let flag = true;
+                for (let i = 0; i < check.length; i++) {
+                    if (!check[i].checked) {
+                        flag = false;
+                        break;
+                    }
+                }
+                checks.checked = flag;
+            }
+        }
+    }
+</script>
+</body>
+</html>

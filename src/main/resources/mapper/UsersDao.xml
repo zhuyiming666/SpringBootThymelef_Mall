@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zym.mapper.UsersDao">
+
+   <insert id="insertUsers" parameterType="Users">
+       insert into tb_login_user(email,password,salt,isdelete)
+       values(#{email},#{password},#{salt},#{isDelete})
+   </insert>
+
+    <select id="findByEmail" parameterType="String" resultType="Users">
+        select * from tb_login_user where email=#{email}
+    </select>
+
+
+    <select id="loginUsers" parameterType="String" resultType="Users">
+        select count(1) from tb_login_user where email=#{email} and password=#{password}
+    </select>
+
+    <insert id="insertUsersMessageId" parameterType="Integer">
+        insert into tb_user_message(id,avatar) values (#{id},'yimingLogo.jpg')
+    </insert>
+
+    <select id="getUsersMessageById" parameterType="Integer" resultType="UsersMessage">
+        select * from tb_user_message where id=#{id};
+    </select>
+</mapper>

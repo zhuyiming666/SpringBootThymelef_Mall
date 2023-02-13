@@ -1,0 +1,19 @@
+      <!--          <div>
+                        生日:&nbsp;<span th:text="${session?.usersMessage?.birth!= null?session?.usersMessage?.birth:'暂无'}"></span>
+                    </div>
+                    <div>
+                        性别:&nbsp;<span th:text="${session?.usersMessage?.sex!= null?session?.usersMessage?.sex:'暂无'}"></span>
+                    </div>
+                    <div>
+                        电话:&nbsp;<span th:text="${session?.usersMessage?.phone!= null?session?.usersMessage?.phone:'暂无'}"></span>
+                    </div>-->
+                 <!--   <div th:if="${not #strings.isEmpty(usersMessage?.name)}">
+                        <span>暂无</span>
+                    </div>-->
+                    <!--<div th:if="${usersMessage != null}">姓名:[[${usersMessage.name}]]</div>-->
+                    <!--<div th:text="${usersMessage.birth != null?${usersMessage.birth}:'暂无'}"></div>
+                    <div th:text="${usersMessage.sex != null?${usersMessage.sex}:'暂无'}"></div>
+                    <div th:text="${usersMessage.phone != null?${usersMessage.phone}:'暂无'}"></div>
+                    <h3>高级设置</h3>&lt;!&ndash;<div><span class="fl">银行卡</span><a href="#" class="fr">管理</a></div>&ndash;&gt;
+                    <div><span class="fl" th:text="${usersMessage.area != null?${usersMessage.area}:'暂无'}"></span><a href="#" class="fr" id="edit2">修改</a></div>
+                &lt;!&ndash;</div>&ndash;&gt;-->

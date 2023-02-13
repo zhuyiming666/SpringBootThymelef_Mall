@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script th:src="@{/js/jquery-1.8.2.min.js}" type="text/javascript"></script>
+    <!--<link rel="stylesheet" th:href="@{/layer/mobile/need/layer.css}">
+    <script th:src="@{/layer/mobile/layer.js}" type="text/javascript"></script>-->
+    <script th:src="@{/layer/layer.js}" type="text/javascript"></script>
+
+</head>
+<body>
+<h1>layerTest</h1>
+
+<script>
+
+    //正上方
+   /* layer.msg('灵活运用offset', {
+        offset: 'e',
+        anim: 6
+    });*/
+   /* var index = layer.open({
+        type: 2,
+        content: 'index.html',
+        area: ['320px', '195px'],
+        maxmin: true
+    });*/
+    layer.alert('内容', {
+        icon: 4,
+        skin: 'layer-ext-demo' //见：扩展说明
+    })
+
+    /*layer.open({
+        type: 1,
+        skin: 'layui-layer-rim', //加上边框
+        area: ['420px', '240px'], //宽高
+        content: '<h1>坤坤</h1>'
+    });*/
+</script>
+</body>
+</html>

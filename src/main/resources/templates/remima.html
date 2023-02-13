@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <title>个人信息</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/public.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/mygrxx.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/bootstrap3/css/bootstrap-theme.min.css}"/>
+    <script type="text/javascript" th:src="@{/js/jquery-1.8.2.min.js}"></script>
+    <script type="text/javascript" th:src="@{/layer/layer.js}"></script>
+    <script type="text/javascript" th:src="@{/js/usersMessage.js}"></script>
+</head>
+<body>
+<div class="address mt">
+    <div class="wrapper clearfix"><a href="index.html" class="fl">首页</a><span>/</span><a href="mygxin.html" class="on">个人信息</a>
+    </div>
+</div><!------------------------------Bott------------------------------>
+<div class="Bott">
+    <div class="wrapper clearfix">
+       <div th:insert="~{headAndtail::myMsgbar}"></div>
+        <div class="you fl"><h2>修改密码</h2>
+            <form action="#" method="get" class="remima">
+                <p><span>原密码：</span><input type="text" name="password"/></p>
+                <p class="op">输入原密码</p>
+                <p><span>新密码：</span><input type="text" name="newPassword"/></p>
+                <p class="op">6-16 个字符，需使用字母、数字或符号组合，不能使用纯数字、纯字母、纯符号</p>
+                <p><span>重复新密码：</span><input type="text" name="ifPassword"/></p>
+                <p class="op">请再次输入密码</p>
+                <p><span>验证码：</span><input type="text" name="checkCode"/><img alt="图片" src="/zym/users/checkCode"  style="height:43px;cursor:pointer;width:80px"  onclick="this.src=this.src+'?'"></p>
+                <p class="op">按右图输入验证码，不区分大小写</p>
+                <input onclick="updatePassword()" style="width:50px;height:30px;margin-left:150px;cursor:pointer" class="btn-success" type="button" value="提交"/>
+            </form>
+        </div>
+    </div>
+</div>
+<!--返回顶部-->
+<div th:insert="~{headAndtail::gotopbar}"></div>
+<!--footer-->
+<div th:insert="~{headAndtail::tailbar}"></div>
+<script th:src="@{/js/jquery-1.12.4.min.js}" type="text/javascript" charset="utf-8"></script>
+<script th:src="@{/js/public.js}" type="text/javascript" charset="utf-8"></script>
+<script th:src="@{/js/pro.js}" type="text/javascript" charset="utf-8"></script>
+<script th:src="@{/js/cart.js}" type="text/javascript" charset="utf-8"></script>
+</body>
+</html>

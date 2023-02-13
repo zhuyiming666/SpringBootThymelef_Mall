@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>商品类别</title>
+    <link rel="icon" href="favicon.ico">
+    <script type="text/javascript" th:src="@{/js/jquery-1.8.2.min.js}"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/public.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/index.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/forget.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/idea.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/mygrxx.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/myorder.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/proList.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/myStyle.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/bootstrap3/css/bootstrap.css}">
+    <script type="text/javascript" th:src="@{/js/public.js}"></script>
+    <script type="text/javascript" th:src="@{/js/jquery-1.8.2.min.js}"></script>
+    <script type="text/javascript" th:src="@{/layer/layer.js}"></script>
+    <script type="text/javascript" th:src="@{/js/login.js}"></script>
+</head>
+<body>
+<div th:insert="~{headAndtail::headbar}"></div>
+<div th:each="product:${productLists}">
+    <a th:href="@{/proDetail(id=${product.id},ptypeId=${product.ptypeId})}" style="float: left; margin-left: 30px; margin-top: 30px; cursor: pointer; text-align: center; font-weight: 800;font-size: 24px;">
+        <dl>
+            <dt><img id="imgStyle" th:src="@{'/shooping_Imgs/'+${product.pimg}}"/><span class="abr"></span></dt>
+            <dd th:text="${product.pname}"></dd>
+            <dd><span style="color: red;" th:text="'￥'+${product.price}"></span></dd>
+        </dl>
+    </a>
+</div>
+
+<div th:insert="~{headAndtail::gotopbar}"></div>
+<div th:insert="~{headAndtail::tailbar}"></div>
+</body>
+</html>

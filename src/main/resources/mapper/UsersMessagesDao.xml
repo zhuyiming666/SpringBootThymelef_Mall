@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zym.mapper.UsersMessagesDao">
+    <update id="editMessage" parameterType="UsersMessage">
+        update tb_user_message
+        <set>
+            <if test="name!=null and name!=''">
+                name=#{name},
+            </if>
+            <if test="sex!=null and sex!=''">
+                sex=#{sex},
+            </if>
+            <if test="birth!=null">
+                birth=#{birth},
+            </if>
+            <if test="phone!=null and phone!=''">
+                phone=#{phone}
+            </if>
+        </set>
+        where id=#{id}
+    </update>
+
+    <select id="getUsersMessageById" parameterType="Integer" resultType="UsersMessage">
+        select *
+        from tb_user_message
+        where id = #{id};
+    </select>
+
+    <update id="updateAvatarById">
+        update tb_user_message
+        set avatar=#{avatar}
+        where id = #{id}
+    </update>
+
+    <select id="getUsersSaltById" parameterType="Integer" resultType="String">
+        select salt
+        from tb_login_user
+        where id = #{id}
+    </select>
+
+    <select id="getUsersPasswordById" parameterType="Integer" resultType="String">
+        select password
+        from tb_login_user
+        where id = #{id}
+    </select>
+
+    <update id="updatePassword">
+        update tb_login_user
+        set salt=#{newSalt},
+            password=#{newPassword}
+        where id = #{id}
+    </update>
+
+    <resultMap id="AddressMapId" type="Address">
+        <id column="aid" property="aid"></id>
+        <result column="province_name" property="provinceName"></result>
+        <result column="province_code" property="provinceCode"></result>
+        <result column="city_name" property="cityName"></result>
+        <result column="city_code" property="cityCode"></result>
+        <result column="area_name" property="areaName"></result>
+        <result column="area_code" property="areaCode"></result>
+        <result column="is_default" property="isDefault"></result>
+        <result column="created_user" property="createdUser"></result>
+        <result column="created_time" property="createdTime"></result>
+        <result column="modified_user" property="modifiedUser"></result>
+        <result column="modified_time" property="modifiedTime"></result>
+    </resultMap>
+
+    <!--useGeneratedKeys="true" 开启和使用主键递增-->
+    <!--keyProperty="aid"  指定主键是哪个-->
+    <insert id="insertAddress" useGeneratedKeys="true" keyProperty="aid">
+        insert into tb_address(uid, name, province_name, province_code, city_name, city_code, area_name, area_code, zip,
+                               address, phone, tel, tag, is_default, created_user, created_time, modified_user,
+                               modified_time)
+        values (#{uid}, #{name}, #{provinceName}, #{provinceCode}, #{cityName}, #{cityCode},
+                #{areaName}, #{areaCode}, #{zip}, #{address}, #{phone}, #{tel}, #{tag}, #{isDefault},
+                #{createdUser}, #{createdTime}, #{modifiedUser}, #{modifiedTime})
+    </insert>
+
+    <select id="countByUid" resultType="Integer">
+        select count(*) from tb_address where uid=#{id}
+    </select>
+
+    <select id="findByParent" resultType="District">
+        select * from t_dict_district where parent=#{parent}
+        order by code asc
+    </select>
+
+    <select id="findNameByCode" parameterType="String" resultType="String">
+        select name from t_dict_district where code=#{code}
+    </select>
+
+    <select id="getAddressAll" resultMap="AddressMapId">
+       select * from tb_address where uid=#{uId} order by is_default desc,created_time desc
+    </select>
+
+    <update id="updateNonDefault">
+        update tb_address set is_default=0 where uid=#{uId}
+    </update>
+
+    <update id="updateDefaultByAid">
+        update tb_address set is_default=1 where aid=#{aId}
+    </update>
+
+    <delete id="deleteAddress">
+        delete from tb_address where aid=#{aId}
+    </delete>
+
+    <select id="getAddressByAid" resultMap="AddressMapId">
+        select * from tb_address where aid=#{aid}
+    </select>
+</mapper>

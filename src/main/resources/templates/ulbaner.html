@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+</head>
+<body>
+<ul class="clearfix" id="bott" th:fragment="ulbar">
+       <li><a th:href="@{/index.html}" class="bright" style="color: red;">首页</a></li>
+       <li th:each="productType:${session.plist}"><a th:href="@{/productByTypeId(ptypeId=${productType.id})}" th:text="${productType.ptypeName}"></a></li>
+    <!--<li><a href="flowerDer.html">装饰摆件</a> </li>-->
+    <!--<li><a href="decoration.html">布艺软饰</a></li>-->
+    <!--<li><a href="paint.html">墙式壁挂</a></li>-->
+    <!--<li><a href="perfume.html">蜡艺香薰</a></li>-->
+    <!--<li><a href="idea.html">创意家居</a></li>-->
+</ul>
+
+
+
+
+</body>
+</html>
